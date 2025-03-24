@@ -1,1 +1,10 @@
-
+<div class="min-h-screen flex justify-center items-center bg-black text-white font-mono">
+  <% if @image.processed_file.attached? %>
+    <div class="relative">
+      <%= image_tag @image.processed_file, class: "rounded-lg shadow-xl max-w-md" %>
+      <p class="text-center mt-4 text-pink-500 text-xl animate-pulse">キモいでしょ？</p>
+    </div>
+  <% else %>
+    <p>加工済画像がまだありません。</p>
+  <% end %>
+</div>

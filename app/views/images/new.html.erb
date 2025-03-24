@@ -1,1 +1,50 @@
+<div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-purple-900 via-black to-black text-gray-100 font-mono animate-flicker px-4">
+  <%= form_with model: @image, url: images_path, local: true, multipart: true, html: { id: "image_upload_form" } do |f| %>
+    <%= f.file_field :file, class: "hidden", id: "image_upload_input" %>
 
+    <label for="image_upload_input"
+      class="group cursor-pointer relative inline-block min-w-[200px] px-6 py-3 rounded bg-pink-700 hover:bg-pink-900 text-white text-xl font-bold shadow-lg ring-2 ring-pink-500 text-center transition duration-300 mb-4">
+      <span class="block group-hover:hidden">画像をアップロード</span>
+      <span class="hidden group-hover:block">本当に？</span>
+    </label>
+
+    <!-- 画像プレビュー表示 -->
+    <div id="preview_container" class="mb-4 hidden">
+      <img id="preview_image" src="#" alt="プレビュー画像" class="max-w-xs rounded shadow-lg mx-auto" />
+    </div>
+
+    <!-- 送信ボタン -->
+    <div class="text-center">
+      <%= f.submit "送信", class: "bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded shadow-lg disabled:opacity-50", id: "submit_button", disabled: true %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("image_upload_input");
+    const preview = document.getElementById("preview_image");
+    const previewContainer = document.getElementById("preview_container");
+    const submitBtn = document.getElementById("submit_button");
+
+    input.addEventListener("change", function () {
+      const file = input.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          previewContainer.classList.remove("hidden");
+          submitBtn.disabled = false;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = "#";
+        previewContainer.classList.add("hidden");
+        submitBtn.disabled = true;
+      }
+    });
+  });
+</script>
