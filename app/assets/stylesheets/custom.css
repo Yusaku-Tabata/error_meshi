@@ -1,10 +1,11 @@
-@keyframes flicker {
+@layer utilities {
+  @keyframes flicker {
     0% { opacity: 1; }
     50% { opacity: 0.85; }
     100% { opacity: 1; }
   }
-  
+
   .animate-flicker {
     animation: flicker 2.5s infinite ease-in-out;
   }
-  
+}
