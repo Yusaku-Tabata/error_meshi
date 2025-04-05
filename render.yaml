@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: error-meshi
-    env: ruby
-    buildCommand: "bundle install && yarn install && rails assets:precompile"
-    startCommand: "bundle exec puma -C config/puma.rb"
-    migrateCommand: "bundle exec rails db:migrate"
