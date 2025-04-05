@@ -69,7 +69,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # SolidQueue などのマイグレーション（本番DB準備）
-RUN ./bin/rails db:migrate
+# RUN ./bin/rails db:migrate
 
 RUN rm -rf node_modules
 
