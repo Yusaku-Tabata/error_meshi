@@ -2,6 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# ↑和訳：このファイルは開発（Dev）用ではなく、本番環境用です。開発環境では Dockerfile.dev を使用する前提です。
+
 # docker build -t myapp .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name myapp myapp
 
@@ -66,6 +68,8 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+# SolidQueue などのマイグレーション（本番DB準備）
+RUN ./bin/rails db:migrate
 
 RUN rm -rf node_modules
 
