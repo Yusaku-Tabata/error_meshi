@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
   
-    # タイトルが送られてこなかった場合、自動的に設定
+    # タイトルが送られてこなかった場合、自動的に設定。後々タイトル入力させる様にするかも
     @image.title ||= "無題画像 - #{Time.current.strftime('%Y%m%d%H%M%S')}"
   
     if @image.save
